@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { extractTextFromPDF, parseCVData } from '../utils/pdfParser';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import './ProfileBuilder.css';
 
 const ProfileBuilder = () => {
@@ -376,37 +378,55 @@ const ProfileBuilder = () => {
     }));
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    const employers = profileData.experience
-      .filter(item => item.employer)
-      .map(item => ({
-        name: item.employer,
-        period: item.period || '',
-        image: item.image || ''
-      }))
-      .filter((item, index, array) =>
-        index === array.findIndex(
-          employer =>
-            employer.name.toLowerCase() === item.name.toLowerCase()
-        )
+
+    try {
+      const employers = profileData.experience
+        .filter(item => item.employer)
+        .map(item => ({
+          name: item.employer,
+          period: item.period || '',
+          image: item.image || ''
+        }))
+        .filter((item, index, array) =>
+          index === array.findIndex(
+            employer =>
+              employer.name.toLowerCase() === item.name.toLowerCase()
+          )
+        );
+
+      const dataToSave = {
+        ...profileData,
+        employers,
+        updatedAt: new Date().toISOString()
+      };
+
+      // 1. Guardar localmente como respaldo
+      localStorage.setItem(
+        'portfolioCVData',
+        JSON.stringify(dataToSave)
       );
 
-    const dataToSave = {
-      ...profileData,
-      employers
-    };
+      // 2. Guardar en Firebase Firestore
+      await setDoc(
+        doc(db, 'profiles', 'main'),
+        dataToSave
+      );
 
-    localStorage.setItem(
-      'portfolioCVData',
-      JSON.stringify(dataToSave)
-    );
+      // 3. Actualizar el estado
+      setProfileData(dataToSave);
 
-    setProfileData(dataToSave);
+      console.log('Datos guardados en Firebase:', dataToSave);
 
-    console.log('Datos guardados:', dataToSave);
+      alert('¡Perfil guardado correctamente en Firebase!');
+    } catch (error) {
+      console.error('Error guardando el perfil en Firebase:', error);
 
-    alert('¡Perfil guardado con éxito!');
+      alert(
+        'El perfil se guardó localmente, pero hubo un error al guardarlo en Firebase.'
+      );
+    }
   };
   const renderArraySection = (title, category) => (
     <div className="form-section">
