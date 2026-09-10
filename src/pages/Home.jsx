@@ -74,7 +74,7 @@ const Home = () => {
             
 
             <a
-              href="https://www.linkedin.com/in/https://www.linkedin.com/in/mike-johnson-32b5791b7/"
+              href="https://www.linkedin.com/in/https://www.linkedin.com/in/https://www.linkedin.com/in/mike-johnson-32b5791b7"
               target="_blank"
               rel="noopener noreferrer"
             >
