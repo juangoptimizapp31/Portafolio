@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import './Home.css';
@@ -71,16 +71,10 @@ const Home = () => {
             </a>
           </div>
           <div className="social-links">
-            <a
-              href={github || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-            </a>
+            
 
             <a
-              href={linkedin || '#'}
+              href="https://www.linkedin.com/in/https://www.linkedin.com/in/mike-johnson-32b5791b7/"
               target="_blank"
               rel="noopener noreferrer"
             >
