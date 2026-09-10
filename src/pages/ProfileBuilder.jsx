@@ -23,10 +23,7 @@ const ProfileBuilder = () => {
     skills: []
   };
 
-  const [profileData, setProfileData] = useState(() => {
-    const saved = localStorage.getItem('portfolioCVData');
-    return saved ? JSON.parse(saved) : defaultProfile;
-  });
+  const [profileData, setProfileData] = useState(defaultProfile);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -402,12 +399,7 @@ const ProfileBuilder = () => {
         updatedAt: new Date().toISOString()
       };
 
-      // 1. Guardar localmente como respaldo
-      localStorage.setItem(
-        'portfolioCVData',
-        JSON.stringify(dataToSave)
-      );
-
+      
       // 2. Guardar en Firebase Firestore
       await setDoc(
         doc(db, 'profiles', 'main'),
@@ -423,9 +415,7 @@ const ProfileBuilder = () => {
     } catch (error) {
       console.error('Error guardando el perfil en Firebase:', error);
 
-      alert(
-        'El perfil se guardó localmente, pero hubo un error al guardarlo en Firebase.'
-      );
+      alert('Error al guardar el perfil en Firebase.');
     }
   };
   const renderArraySection = (title, category) => (
