@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { extractTextFromPDF, parseCVData } from '../utils/pdfParser';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import './ProfileBuilder.css';
 
@@ -24,6 +24,29 @@ const ProfileBuilder = () => {
   };
 
   const [profileData, setProfileData] = useState(defaultProfile);
+    useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const profileRef = doc(db, 'profiles', 'main');
+        const profileSnap = await getDoc(profileRef);
+
+        if (profileSnap.exists()) {
+          const savedData = profileSnap.data();
+
+          setProfileData(prev => ({
+            ...prev,
+            ...savedData
+          }));
+
+          console.log('Perfil cargado desde Firebase:', savedData);
+        }
+      } catch (error) {
+        console.error('Error cargando el perfil desde Firebase:', error);
+      }
+    };
+
+    loadProfile();
+  }, []);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
