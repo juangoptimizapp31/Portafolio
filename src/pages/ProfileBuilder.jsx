@@ -403,9 +403,9 @@ const ProfileBuilder = () => {
 
     try {
       const employers = profileData.experience
-        .filter(item => item.employer)
+        .filter(item => item.employer || item.title)
         .map(item => ({
-          name: item.employer,
+          name: item.employer || item.title,
           period: item.period || '',
           image: item.image || ''
         }))
