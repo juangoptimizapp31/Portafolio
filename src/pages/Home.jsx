@@ -56,7 +56,7 @@ const Home = () => {
         <div className="home-content">
           <h1 className="home-title">
             Hi, I'm a <br />
-            <span className="text-gradient">Software Developer</span>
+            <span className="text-gradient">Mike Johnson</span>
           </h1>
           <p className="home-subtitle">
             {summary}
