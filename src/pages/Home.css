@@ -100,21 +100,96 @@
   }
 }
 
+/* =========================================================
+   MOBILE HOME
+   ========================================================= */
+
 @media (max-width: 768px) {
+
+  .home {
+    min-height: 100vh;
+    padding-top: 150px;
+    padding-bottom: 4rem;
+  }
+
   .home-container {
+    width: 100%;
     grid-template-columns: 1fr;
+    gap: 2.5rem;
     text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .home-buttons {
-    justify-content: center;
-  }
-
-  .social-links {
-    justify-content: center;
-  }
+  /* =========================
+     TITULO
+     ========================= */
 
   .home-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+
+  /* =========================
+     DESCRIPCION
+     ========================= */
+
+  .home-subtitle {
+    max-width: 340px;
+    margin: 0 auto 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* =========================
+     BOTONES
+     ========================= */
+
+  .home-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .home-buttons .btn {
+    min-width: 135px;
+    min-height: 44px;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  /* =========================
+     REDES SOCIALES
+     ========================= */
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    font-size: 1.35rem;
+  }
+
+  /* =========================
+     IMAGEN
+     ========================= */
+
+  .home-image {
+    width: min(78vw, 280px);
+    height: min(78vw, 280px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
