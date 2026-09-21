@@ -11,7 +11,8 @@
 }
 
 .navbar.glass-card:hover {
-  transform: translateX(-50%); /* Prevent the default translateY(-5px) which breaks horizontal centering */
+  transform: translateX(-50%);
+  /* Prevent the default translateY(-5px) which breaks horizontal centering */
 }
 
 .nav-container {
@@ -38,7 +39,8 @@
   position: relative;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--text-primary);
 }
 
@@ -51,4 +53,46 @@
   height: 2px;
   background: var(--accent-gradient);
   border-radius: 2px;
+}
+
+/* =========================================================
+   MOBILE NAVBAR
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    top: 0.75rem;
+    width: calc(100% - 20px);
+    padding: 0.75rem 0.9rem;
+    border-radius: 24px;
+  }
+
+  .nav-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
 }
